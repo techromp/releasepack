@@ -12,14 +12,14 @@ function buildProgram() {
   const program = new Command();
 
   program
-    .name('release-engine')
+    .name('releasepack')
     .description('Generate release artifacts from git history (deterministic, offline).')
     .version('0.1.0');
 
   program
     .command('generate')
     .description('Generate changelog-section.md, release-notes.md, and social-x.txt')
-    .option('--out <dir>', 'output directory', './release-engine-out')
+    .option('--out <dir>', 'output directory', './releasepack-out')
     .option('--from <ref>', 'starting git ref (tag/sha/branch)')
     .option('--to <ref>', 'ending git ref (tag/sha/branch)', 'HEAD')
     .option('-n, --commits <number>', 'fallback number of commits when no tags and no explicit range', (v) => parseInt(v, 10), 20)
