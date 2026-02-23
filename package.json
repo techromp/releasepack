@@ -1,14 +1,14 @@
 {
-  "name": "release-engine",
+  "name": "releasepack",
   "version": "0.1.0",
   "description": "Deterministic CLI that generates changelog snippet, release notes, and an X post from git history.",
   "license": "MIT",
   "main": "src/index.js",
   "bin": {
-    "release-engine": "bin/release-engine.js"
+    "releasepack": "./bin/release-engine.js"
   },
   "scripts": {
-    "test": "node -c bin/release-engine.js && node -c src/index.js && node -c src/git.js && node -c src/classify.js && node -c src/io.js && node -c src/render/changelog.js && node -c src/render/releaseNotes.js && node -c src/render/socialX.js && node test/run.js",
+    "test": "node test/run.js",
     "start": "node bin/release-engine.js --help"
   },
   "engines": {
