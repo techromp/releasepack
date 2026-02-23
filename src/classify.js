@@ -1,15 +1,27 @@
-function parseConventionalType(subject) {
+function parseConventional(subject) {
   // e.g. feat(api)!: add new endpoint
-  const m = subject.match(/^([a-zA-Z]+)(\([^\)]+\))?(!)?:\s+/);
+  const m = subject.match(/^([a-zA-Z]+)(\(([^\)]+)\))?(!)?:\s+/);
   if (!m) return null;
   return {
     type: m[1].toLowerCase(),
-    breaking: Boolean(m[3]),
+    scope: (m[3] || '').toLowerCase() || null,
+    breaking: Boolean(m[4]),
   };
+}
+
+function includesAny(haystack, needles) {
+  return needles.some((n) => haystack.includes(n));
 }
 
 function heuristicType(subject) {
   const s = subject.toLowerCase();
+
+  // Security first
+  if (includesAny(s, ['cve', 'vuln', 'security', 'xss', 'csrf', 'sanitize', 'auth', 'jwt'])) return 'security';
+
+  // Dependencies
+  if (includesAny(s, ['bump', 'upgrade', 'dependabot', 'dependency', 'deps'])) return 'deps';
+
   if (s.includes('fix') || s.startsWith('fix ') || s.startsWith('bug')) return 'fix';
   if (s.includes('add') || s.includes('introduc') || s.includes('create')) return 'feat';
   if (s.includes('remove') || s.includes('delete')) return 'change';
@@ -19,12 +31,23 @@ function heuristicType(subject) {
   return 'other';
 }
 
-function bucketForType(type) {
+function bucketFor({ conv, type }) {
+  // Explicit conventional commit mapping overrides generic buckets.
+  if (conv) {
+    if (conv.type === 'security') return 'Security';
+    if (conv.type === 'deps') return 'Dependencies';
+    if (conv.scope === 'deps' && (conv.type === 'build' || conv.type === 'chore')) return 'Dependencies';
+  }
+
   switch (type) {
     case 'feat':
       return 'Added';
     case 'fix':
       return 'Fixed';
+    case 'security':
+      return 'Security';
+    case 'deps':
+      return 'Dependencies';
     case 'perf':
       return 'Changed';
     case 'refactor':
@@ -54,14 +77,16 @@ function cleanSubject(subject) {
 function classifyCommits(commits) {
   const buckets = {
     Added: [],
-    Changed: [],
     Fixed: [],
+    Security: [],
+    Changed: [],
+    Dependencies: [],
     Other: [],
     Breaking: [],
   };
 
   for (const c of commits) {
-    const conv = parseConventionalType(c.subject);
+    const conv = parseConventional(c.subject);
     const type = conv ? conv.type : heuristicType(c.subject);
 
     const breaking = (conv && conv.breaking) || /BREAKING CHANGE/i.test(c.body);
@@ -71,7 +96,7 @@ function classifyCommits(commits) {
       buckets.Breaking.push({ ...c, bullet });
     }
 
-    const bucket = bucketForType(type);
+    const bucket = bucketFor({ conv, type });
     buckets[bucket].push({ ...c, bullet });
   }
 

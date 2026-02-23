@@ -5,12 +5,14 @@ function truncateTo280(s) {
 }
 
 function pickTopBullets(buckets, max) {
-  const order = ['Breaking', 'Fixed', 'Added', 'Changed', 'Other'];
+  // Prefer Added then Fixed then Security. Keep deterministic; ignore Breaking in v0.1 X post.
+  const order = ['Added', 'Fixed', 'Security', 'Changed', 'Dependencies', 'Other'];
   const map = {
-    Breaking: buckets.Breaking || [],
-    Fixed: buckets.Fixed || [],
     Added: buckets.Added || [],
+    Fixed: buckets.Fixed || [],
+    Security: buckets.Security || [],
     Changed: buckets.Changed || [],
+    Dependencies: buckets.Dependencies || [],
     Other: buckets.Other || [],
   };
 
@@ -25,7 +27,7 @@ function pickTopBullets(buckets, max) {
 }
 
 function renderSocialX(buckets, context) {
-  const bullets = pickTopBullets(buckets, 2);
+  const bullets = pickTopBullets(buckets, 3);
 
   let base = `${context.title}: `;
   if (bullets.length === 0) {
@@ -35,8 +37,15 @@ function renderSocialX(buckets, context) {
 
   base += bullets.join(' • ');
 
-  // Add a tiny hint if there are more changes.
-  const total = (buckets.Added?.length || 0) + (buckets.Changed?.length || 0) + (buckets.Fixed?.length || 0) + (buckets.Other?.length || 0) + (buckets.Breaking?.length || 0);
+  const total =
+    (buckets.Added?.length || 0) +
+    (buckets.Fixed?.length || 0) +
+    (buckets.Security?.length || 0) +
+    (buckets.Changed?.length || 0) +
+    (buckets.Dependencies?.length || 0) +
+    (buckets.Other?.length || 0) +
+    (buckets.Breaking?.length || 0);
+
   if (total > bullets.length) base += ' (and more)';
 
   return truncateTo280(base) + '\n';

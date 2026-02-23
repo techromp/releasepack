@@ -14,11 +14,14 @@ function renderReleaseNotes(buckets, context) {
   lines.push(`Generated from git range: ${context.range || `last ${context.commitCount} commits`}`);
   lines.push('');
 
+  // Order: Breaking, Added, Fixed, Security, Changed, Dependencies, Other
   const order = [
     ['Breaking Changes', buckets.Breaking],
     ['Added', buckets.Added],
-    ['Changed', buckets.Changed],
     ['Fixed', buckets.Fixed],
+    ['Security', buckets.Security],
+    ['Changed', buckets.Changed],
+    ['Dependencies', buckets.Dependencies],
     ['Other', buckets.Other],
   ];
 

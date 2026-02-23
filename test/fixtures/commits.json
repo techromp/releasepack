@@ -1,0 +1,7 @@
+[
+  {"hash":"a1","subject":"feat: add export command","body":""},
+  {"hash":"a2","subject":"fix: handle empty range","body":""},
+  {"hash":"a3","subject":"security: sanitize jwt parsing","body":""},
+  {"hash":"a4","subject":"chore(deps): bump commander to 12.1.0","body":""},
+  {"hash":"a5","subject":"docs: update README","body":""}
+]

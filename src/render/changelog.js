@@ -13,14 +13,14 @@ function renderChangelogSection(buckets, context) {
   lines.push(`## ${context.title}`);
   lines.push('');
 
-  // Breaking first if present.
+  // Order: Breaking, Added, Fixed, Security, Changed, Dependencies, Other
   const breaking = mdSection('Breaking Changes', buckets.Breaking);
   if (breaking) {
     lines.push(breaking);
     lines.push('');
   }
 
-  for (const key of ['Added', 'Changed', 'Fixed', 'Other']) {
+  for (const key of ['Added', 'Fixed', 'Security', 'Changed', 'Dependencies', 'Other']) {
     const sec = mdSection(key, buckets[key]);
     if (sec) {
       lines.push(sec);
@@ -28,7 +28,6 @@ function renderChangelogSection(buckets, context) {
     }
   }
 
-  // Trim trailing blank line.
   while (lines.length && lines[lines.length - 1] === '') lines.pop();
   lines.push('');
   return lines.join('\n');
