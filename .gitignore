@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# OpenClaw local agent/workspace files
+.openclaw/
+.pi/
+memory/
+AGENTS.md
+BOOTSTRAP.md
+HEARTBEAT.md
+SOUL.md
+TOOLS.md
+USER.md
+IDENTITY.md
+
+# OS / editor
+.DS_Store
+*.log
+
+# Generated outputs
+releasepack-out/
