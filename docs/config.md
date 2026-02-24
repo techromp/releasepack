@@ -26,7 +26,7 @@ All fields are optional unless noted.
 - `xHandle` (string, optional)
 - `signature` (string, optional)
 - `sectionsOrder` (array of strings, optional)
-  - Allowed values: `Breaking`, `Added`, `Fixed`, `Security`, `Changed`, `Dependencies`, `Other`
+  - Allowed values: `Breaking`, `Added`, `Fixed`, `Security`, `Changed`, `Dependencies`, `Docs`, `Tests`, `CI`, `Build`, `Other`
 
 ## Example (YAML)
 

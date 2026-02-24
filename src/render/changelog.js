@@ -21,7 +21,7 @@ function renderChangelogSection(buckets, context, config = {}) {
     lines.push('');
   }
 
-  const defaultKeys = ['Breaking', 'Added', 'Fixed', 'Security', 'Changed', 'Dependencies', 'Other'];
+  const defaultKeys = ['Breaking', 'Added', 'Fixed', 'Security', 'Changed', 'Dependencies', 'Docs', 'Tests', 'CI', 'Build', 'Other'];
   const keys = Array.isArray(config.sectionsOrder) ? config.sectionsOrder : defaultKeys;
 
   for (const k of keys) {

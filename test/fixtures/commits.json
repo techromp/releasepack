@@ -3,5 +3,11 @@
   {"hash":"a2","subject":"fix: handle empty range","body":""},
   {"hash":"a3","subject":"security: sanitize jwt parsing","body":""},
   {"hash":"a4","subject":"chore(deps): bump commander to 12.1.0","body":""},
-  {"hash":"a5","subject":"docs: update README","body":""}
+  {"hash":"a5","subject":"docs: update README","body":""},
+  {"hash":"a6","subject":"test: add config parsing coverage","body":""},
+  {"hash":"a7","subject":"ci: run tests on push","body":""},
+  {"hash":"a8","subject":"build: tighten npm package files","body":""},
+  {"hash":"a9","subject":"feat!: rename generate to pack","body":""},
+  {"hash":"a10","subject":"fix: old flag no longer works","body":"\nBREAKING CHANGE: --old-flag has been removed; use --new-flag\n"},
+  {"hash":"a11","subject":"Merge pull request #12 from someone/branch","body":""}
 ]

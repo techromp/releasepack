@@ -24,6 +24,10 @@ function normalizeSectionsOrder(val) {
     'Security',
     'Changed',
     'Dependencies',
+    'Docs',
+    'Tests',
+    'CI',
+    'Build',
     'Other',
   ]);
 
@@ -41,6 +45,10 @@ function normalizeSectionsOrder(val) {
       s.toLowerCase() === 'added' ? 'Added' :
       s.toLowerCase() === 'fixed' ? 'Fixed' :
       s.toLowerCase() === 'changed' ? 'Changed' :
+      s.toLowerCase() === 'docs' ? 'Docs' :
+      s.toLowerCase() === 'tests' ? 'Tests' :
+      s.toLowerCase() === 'ci' ? 'CI' :
+      s.toLowerCase() === 'build' ? 'Build' :
       s.toLowerCase() === 'other' ? 'Other' :
       null;
 

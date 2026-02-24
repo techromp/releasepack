@@ -32,6 +32,10 @@ function renderReleaseNotes(buckets, context, config = {}) {
     ['Security', buckets.Security],
     ['Changed', buckets.Changed],
     ['Dependencies', buckets.Dependencies],
+    ['Docs', buckets.Docs],
+    ['Tests', buckets.Tests],
+    ['CI', buckets.CI],
+    ['Build', buckets.Build],
     ['Other', buckets.Other],
   ];
 
@@ -42,6 +46,10 @@ function renderReleaseNotes(buckets, context, config = {}) {
     ['Security', ['Security', buckets.Security]],
     ['Changed', ['Changed', buckets.Changed]],
     ['Dependencies', ['Dependencies', buckets.Dependencies]],
+    ['Docs', ['Docs', buckets.Docs]],
+    ['Tests', ['Tests', buckets.Tests]],
+    ['CI', ['CI', buckets.CI]],
+    ['Build', ['Build', buckets.Build]],
     ['Other', ['Other', buckets.Other]],
   ]);
 

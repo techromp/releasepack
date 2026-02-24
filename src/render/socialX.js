@@ -6,19 +6,24 @@ function truncateTo280(s) {
 
 function pickTopBullets(buckets, max) {
   // Prefer Added then Fixed then Security. Keep deterministic; ignore Breaking in v0.1 X post.
-  const order = ['Added', 'Fixed', 'Security', 'Changed', 'Dependencies', 'Other'];
+  const order = ['Added', 'Fixed', 'Security', 'Changed', 'Dependencies', 'Docs', 'Tests', 'CI', 'Build', 'Other'];
   const map = {
     Added: buckets.Added || [],
     Fixed: buckets.Fixed || [],
     Security: buckets.Security || [],
     Changed: buckets.Changed || [],
     Dependencies: buckets.Dependencies || [],
+    Docs: buckets.Docs || [],
+    Tests: buckets.Tests || [],
+    CI: buckets.CI || [],
+    Build: buckets.Build || [],
     Other: buckets.Other || [],
   };
 
   const picked = [];
   for (const k of order) {
     for (const it of map[k]) {
+      if (it.isBreaking) continue;
       picked.push(it.bullet);
       if (picked.length >= max) return picked;
     }
@@ -43,6 +48,10 @@ function renderSocialX(buckets, context, config = {}) {
     (buckets.Security?.length || 0) +
     (buckets.Changed?.length || 0) +
     (buckets.Dependencies?.length || 0) +
+    (buckets.Docs?.length || 0) +
+    (buckets.Tests?.length || 0) +
+    (buckets.CI?.length || 0) +
+    (buckets.Build?.length || 0) +
     (buckets.Other?.length || 0) +
     (buckets.Breaking?.length || 0);
 
