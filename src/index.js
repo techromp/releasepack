@@ -2,6 +2,7 @@ const { Command } = require('commander');
 const path = require('path');
 
 const { ensureGitRepo, resolveRange, getCommits } = require('./git');
+const { loadConfig } = require('./config');
 const { classifyCommits } = require('./classify');
 const { renderChangelogSection } = require('./render/changelog');
 const { renderReleaseNotes } = require('./render/releaseNotes');
@@ -20,6 +21,7 @@ function buildProgram() {
     .command('generate')
     .description('Generate changelog-section.md, release-notes.md, and social-x.txt')
     .option('--out <dir>', 'output directory', './releasepack-out')
+    .option('--config <path>', 'optional config path (defaults to ./releasepack.yml or ./releasepack.json)')
     .option('--from <ref>', 'starting git ref (tag/sha/branch)')
     .option('--to <ref>', 'ending git ref (tag/sha/branch)', 'HEAD')
     .option('-n, --commits <number>', 'fallback number of commits when no tags and no explicit range', (v) => parseInt(v, 10), 20)
@@ -35,6 +37,11 @@ function buildProgram() {
         fallbackCommits: opts.commits,
       });
 
+      const { config, path: configPath } = loadConfig({
+        cwd: process.cwd(),
+        configPath: opts.config,
+      });
+
       const commits = getCommits(rangeInfo);
       const classified = classifyCommits(commits);
 
@@ -45,20 +52,22 @@ function buildProgram() {
         from: rangeInfo.from,
         to: rangeInfo.to,
         commitCount: commits.length,
+        configPath,
       };
 
       const outDir = path.resolve(process.cwd(), opts.out);
 
       const outputs = {
-        'changelog-section.md': renderChangelogSection(classified, context),
-        'release-notes.md': renderReleaseNotes(classified, context),
-        'social-x.txt': renderSocialX(classified, context),
+        'changelog-section.md': renderChangelogSection(classified, context, config),
+        'release-notes.md': renderReleaseNotes(classified, context, config),
+        'social-x.txt': renderSocialX(classified, context, config),
       };
 
       if (opts.verbose) {
         const rangeLabel = rangeInfo.range ? rangeInfo.range : `last ${rangeInfo.fallbackCommits} commits`;
         process.stderr.write(`Resolved range: ${rangeLabel}\n`);
         process.stderr.write(`Commits: ${commits.length}\n`);
+        if (configPath) process.stderr.write(`Config: ${configPath}\n`);
       }
 
       if (opts.dryRun) {

@@ -10,6 +10,19 @@ npx releasepack@latest generate
 
 By default it writes outputs to `./releasepack-out/`.
 
+## Config (optional)
+
+Drop a `releasepack.yml` (or `releasepack.json`) in your repo root to add light branding and ordering.
+
+```yml
+productName: releasepack
+website: https://github.com/techromp/releasepack
+signature: "— releasepack"
+sectionsOrder: [Added, Fixed, Security, Changed, Dependencies, Other, Breaking]
+```
+
+Docs: `docs/config.md`
+
 ## What it generates
 
 `releasepack generate` produces **three paste-ready files**:

@@ -1,6 +1,6 @@
 {
   "name": "releasepack",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Deterministic CLI that generates changelog snippet, release notes, and an X post from git history.",
   "license": "MIT",
   "main": "src/index.js",
@@ -15,7 +15,8 @@
     "node": ">=18"
   },
   "dependencies": {
-    "commander": "^12.1.0"
+    "commander": "^12.1.0",
+    "yaml": "^2.8.2"
   },
   "keywords": [
     "release-notes",

@@ -8,20 +8,32 @@ function mdSection(title, items) {
   return lines.join('\n');
 }
 
-function renderChangelogSection(buckets, context) {
+function renderChangelogSection(buckets, context, config = {}) {
   const lines = [];
   lines.push(`## ${context.title}`);
   lines.push('');
 
-  // Order: Breaking, Added, Fixed, Security, Changed, Dependencies, Other
-  const breaking = mdSection('Breaking Changes', buckets.Breaking);
-  if (breaking) {
-    lines.push(breaking);
+  if (config.productName || config.website) {
+    const meta = [];
+    if (config.productName) meta.push(config.productName);
+    if (config.website) meta.push(config.website);
+    lines.push(`_(${meta.join(' · ')})_`);
     lines.push('');
   }
 
-  for (const key of ['Added', 'Fixed', 'Security', 'Changed', 'Dependencies', 'Other']) {
-    const sec = mdSection(key, buckets[key]);
+  const defaultKeys = ['Breaking', 'Added', 'Fixed', 'Security', 'Changed', 'Dependencies', 'Other'];
+  const keys = Array.isArray(config.sectionsOrder) ? config.sectionsOrder : defaultKeys;
+
+  for (const k of keys) {
+    if (k === 'Breaking') {
+      const breaking = mdSection('Breaking Changes', buckets.Breaking);
+      if (breaking) {
+        lines.push(breaking);
+        lines.push('');
+      }
+      continue;
+    }
+    const sec = mdSection(k, buckets[k]);
     if (sec) {
       lines.push(sec);
       lines.push('');

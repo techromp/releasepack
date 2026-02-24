@@ -26,7 +26,7 @@ function pickTopBullets(buckets, max) {
   return picked;
 }
 
-function renderSocialX(buckets, context) {
+function renderSocialX(buckets, context, config = {}) {
   const bullets = pickTopBullets(buckets, 3);
 
   let base = `${context.title}: `;
@@ -47,6 +47,22 @@ function renderSocialX(buckets, context) {
     (buckets.Breaking?.length || 0);
 
   if (total > bullets.length) base += ' (and more)';
+
+  // Optional: add handle and/or website if it fits.
+  const extras = [];
+  if (config.xHandle) {
+    const h = String(config.xHandle).trim();
+    if (h) extras.push(h.startsWith('@') ? h : `@${h}`);
+  }
+  if (config.website) {
+    const w = String(config.website).trim();
+    if (w) extras.push(w);
+  }
+  if (extras.length) {
+    const candidate = `${base} — ${extras.join(' · ')}`;
+    base = truncateTo280(candidate);
+    return base + '\n';
+  }
 
   return truncateTo280(base) + '\n';
 }
