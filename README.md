@@ -5,7 +5,7 @@ Deterministic, offline CLI that generates release communication artifacts from y
 ## Install / run (no install)
 
 ```bash
-npx releasepack generate
+npx releasepack@latest generate
 ```
 
 By default it writes outputs to `./releasepack-out/`.
@@ -68,7 +68,8 @@ Given the same repo state and commit range, `releasepack` produces the same outp
 ### Links
 
 - npm: https://www.npmjs.com/package/releasepack
-- Pro Kit (templates/checklists/examples): https://gumroad.com/l/releasepack-pro-kit
+
+Optional Pro Kit (templates + checklists): https://gumroad.com/l/releasepack-pro-kit
 
 ## License
 
