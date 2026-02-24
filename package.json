@@ -1,6 +1,6 @@
 {
   "name": "releasepack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Deterministic CLI that generates changelog snippet, release notes, and an X post from git history.",
   "license": "MIT",
   "main": "src/index.js",
@@ -16,5 +16,21 @@
   },
   "dependencies": {
     "commander": "^12.1.0"
-  }
+  },
+  "keywords": [
+    "release-notes",
+    "changelog",
+    "git",
+    "cli",
+    "developer-tools",
+    "conventional-commits"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techromp/releasepack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/techromp/releasepack/issues"
+  },
+  "homepage": "https://github.com/techromp/releasepack#readme"
 }
