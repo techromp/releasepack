@@ -70,6 +70,10 @@ See `docs/demo.txt` for a full deterministic demo run.
 
 Given the same repo state and commit range, `releasepack` produces the same output.
 
+## GitHub Action (example)
+
+Minimal workflow example: `docs/github-action.md`
+
 ## Roadmap
 
 - GitHub Action: generate artifacts on tag push and attach to Releases
