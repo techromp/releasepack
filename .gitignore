@@ -1,6 +1,25 @@
 # Dependencies
 node_modules/
 
+# Build / pack artifacts
+*.tgz
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Caches
+.cache/
+
+# Generated outputs
+releasepack-out/
+
 # OpenClaw local agent/workspace files
 .openclaw/
 .pi/
@@ -16,6 +35,3 @@ IDENTITY.md
 # OS / editor
 .DS_Store
 *.log
-
-# Generated outputs
-releasepack-out/

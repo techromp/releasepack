@@ -2,51 +2,73 @@
 
 Deterministic, offline CLI that generates release communication artifacts from your git history.
 
-## What it generates
-
-Running `releasepack generate` produces **three files** (ready to paste):
-
-- `changelog-section.md`
-- `release-notes.md`
-- `social-x.txt`
-
-## Quickstart (no install)
+## Install / run (no install)
 
 ```bash
 npx releasepack generate
 ```
 
-Outputs are written to `./releasepack-out/` by default.
+By default it writes outputs to `./releasepack-out/`.
 
-## Install globally
+## What it generates
 
-```bash
-npm i -g releasepack
-releasepack generate
-```
+`releasepack generate` produces **three paste-ready files**:
 
-## Example commands
+- `changelog-section.md`
+- `release-notes.md`
+- `social-x.txt`
+
+## Example
 
 ```bash
 # Default: latest tag..HEAD (if tags exist), otherwise last 20 commits
 releasepack generate
 
-# Choose a range explicitly
+# Or choose a range explicitly
 releasepack generate --from v1.2.0 --to HEAD
-
-# No tags repo: choose last 50 commits
-releasepack generate -n 50
-
-# Write to a custom output folder
-releasepack generate --out ./out
 
 # Preview in your terminal (no files written)
 releasepack generate --dry-run
 ```
 
+Sample output snippet:
+
+```text
+--- release-notes.md ---
+# Demo Release v0.0.1
+
+Generated from git range: last 5 commits
+
+## Added
+- add export command
+
+## Fixed
+- handle empty range
+```
+
+See `docs/demo.txt` for a full deterministic demo run.
+
 ## Deterministic / offline
 
-`releasepack` does not use an LLM and makes no network calls. Given the same repo state and commit range, it will generate the same output.
+- **No LLM**
+- **No OAuth**
+- **No API calls**
+- **No network access required**
+
+Given the same repo state and commit range, `releasepack` produces the same output.
+
+## Roadmap
+
+- GitHub Action: generate artifacts on tag push and attach to Releases
+- Template selection: choose tone/output format (SaaS, OSS, enterprise, hotfix)
+- CI mode: machine-friendly output + exit codes for required sections
+
+---
+
+### Links
+
+- npm: https://www.npmjs.com/package/releasepack
+- Pro Kit (templates/checklists/examples): https://gumroad.com/l/releasepack-pro-kit
 
 ## License
 

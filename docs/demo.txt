@@ -1,0 +1,41 @@
+--- changelog-section.md ---
+## Demo Release v0.0.1
+
+### Added
+- add export command
+
+### Fixed
+- handle empty range
+
+### Security
+- sanitize jwt parsing
+
+### Changed
+- update README
+
+### Dependencies
+- bump commander to 12.1.0
+
+--- release-notes.md ---
+# Demo Release v0.0.1
+
+Generated from git range: last 5 commits
+
+## Added
+- add export command
+
+## Fixed
+- handle empty range
+
+## Security
+- sanitize jwt parsing
+
+## Changed
+- update README
+
+## Dependencies
+- bump commander to 12.1.0
+
+
+--- social-x.txt ---
+Demo Release v0.0.1: add export command • handle empty range • sanitize jwt parsing (and more)

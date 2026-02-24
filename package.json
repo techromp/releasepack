@@ -5,7 +5,7 @@
   "license": "MIT",
   "main": "src/index.js",
   "bin": {
-    "releasepack": "./bin/release-engine.js"
+    "releasepack": "bin/release-engine.js"
   },
   "scripts": {
     "test": "node test/run.js",
